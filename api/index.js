@@ -4,8 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const { FRONTEND_URL, PORT } = require('./config.cjs');
-const sequelize = require('./sequelize');  // Importa la instancia de Sequelize
-const usersController = require('./controllers/users');  // Ajusta la ruta según la estructura de tu proyecto
+const sequelize = require('./sequelize');
+const userController = require('./controllers/users');
 
 const app = express();
 
@@ -23,11 +23,7 @@ app.use(
 );
 
 // Rutas de la API
-app.get('/api/controllers/users', usersController.getAllUsers);
-app.get('/api/controllers/users/:id', usersController.getUserById);
-app.post('/api/controllers/users', usersController.createUser);
-app.put('/api/controllers/users/:id', usersController.updateUser);
-app.delete('/api/controllers/users/:id', usersController.deleteUser);
+app.use('/api', require('./routes'));
 
 // Iniciar el servidor
 app.listen(PORT, () => {
@@ -35,7 +31,7 @@ app.listen(PORT, () => {
 });
 
 // Sincronización de Sequelize con la base de datos
-sequelize.sync({ force: false })  // Cambia a true si quieres que Sequelize sincronice la base de datos (crear o modificar tablas)
+sequelize.sync({ force: false })  // Cambiar a true si se desea sincronizar la base de datos
   .then(() => {
     console.log('Conexión establecida con la base de datos');
   })

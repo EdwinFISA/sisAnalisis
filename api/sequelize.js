@@ -1,14 +1,12 @@
 // sequelize.js
 
 const { Sequelize } = require('sequelize');
+const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME } = require('./config.cjs');
 
-const sequelize = new Sequelize({
-  dialect: 'postgres',
-  database: process.env.DB_NAME || 'database_name',  // Nombre de tu base de datos en PostgreSQL
-  username: process.env.DB_USER || 'database_user',  // Usuario de PostgreSQL
-  password: process.env.DB_PASSWORD || 'database_password',  // Contraseña de PostgreSQL
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,  // Puerto de PostgreSQL (por defecto es 5432)
+// Configuración de la conexión a la base de datos PostgreSQL
+const sequelize = new Sequelize(DB_NAME, DB_USERNAME, DB_PASSWORD, {
+  host: DB_HOST,
+  dialect: 'postgres', // Se ajusta al dialecto correspondiente
 });
 
 module.exports = sequelize;
