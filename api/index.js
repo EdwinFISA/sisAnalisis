@@ -40,6 +40,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/", routes);
 
 // Start the server
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
