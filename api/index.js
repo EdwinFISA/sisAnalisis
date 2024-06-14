@@ -2,15 +2,12 @@ const express = require("express");
 const session = require("express-session");
 const SQLiteStore = require("connect-sqlite3")(session);
 const routes = require("./routes/routes");
-const {FRONTEND_URL, PORT} = require("./config.cjs");
-
-//const cors = require("express-cors");
+const { FRONTEND_URL, PORT } = require("./config.cjs");
 const cors = require("cors");
 
 const app = express();
-//const port = PORT;
 
-// Configure session with SQLite store
+// Configurar sesión con SQLite store
 app.use(
   session({
     secret: "secret",
@@ -23,24 +20,23 @@ app.use(
   })
 );
 
-
-// Configurar CORS adecuadamente
-const corsOptions = {
-  origin: FRONTEND_URL,  // Usar FRONTEND_URL definido en config.cjs
-  credentials: true,     // Permitir credenciales (cookies, tokens)
-  methods: ["GET", "POST", "PUT", "DELETE"],  // Métodos permitidos
-  allowedHeaders: ["Content-Type", "Authorization"],  // Encabezados permitidos
-};
-
-app.use(cors(corsOptions));
+// Configurar CORS
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Use routes
+// Usar las rutas
 app.use("/", routes);
 
-// Start the server
+// Iniciar el servidor
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
