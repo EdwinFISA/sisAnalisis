@@ -1,11 +1,15 @@
+// En src/api/models/DBusers.js
+
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("database", "username", "password", {
-  host: "localhost",
+
+// Configura la conexión a PostgreSQL
+const sequelize = new Sequelize("DBBonanza", "db_461c_user", "db_461c_user", {
+  host: "dpg-cpm2ve5ds78s738sst80-a",
   dialect: "postgres",
 });
 
+// Define el modelo DBusers
 const DBusers = sequelize.define("DBusers", {
-  // Define los campos de la tabla 'DBusers'
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,

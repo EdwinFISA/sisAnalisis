@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { FRONTEND_URL, PORT } = require('./config.cjs');
 const sequelize = require('./sequelize');  // Importa la instancia de Sequelize
-const bookController = require('./controllers/users');  // Ajusta la ruta según la estructura de tu proyecto
+const usersController = require('./controllers/users');  // Ajusta la ruta según la estructura de tu proyecto
 
 const app = express();
 
@@ -23,11 +23,11 @@ app.use(
 );
 
 // Rutas de la API
-app.get('/api/books', bookController.getAllBooks);
-app.get('/api/books/:id', bookController.getBookById);
-app.post('/api/books', bookController.createBook);
-app.put('/api/books/:id', bookController.updateBook);
-app.delete('/api/books/:id', bookController.deleteBook);
+app.get('/api/users', usersController.getAllUsers);
+app.get('/api/users/:id', usersController.getUserById);
+app.post('/api/users', usersController.createUser);
+app.put('/api/users/:id', usersController.updateUser);
+app.delete('/api/users/:id', usersController.deleteUser);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
