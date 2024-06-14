@@ -1,10 +1,11 @@
-// models/DBusers.js
+const { Sequelize, DataTypes } = require("sequelize");
+const sequelize = new Sequelize("database", "username", "password", {
+  host: "localhost",
+  dialect: "postgres",
+});
 
-const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize');  // Asegúrate de importar tu instancia de Sequelize
-
-// Define el modelo User
-const User = sequelize.define('User', {
+const DBusers = sequelize.define("DBusers", {
+  // Define los campos de la tabla 'DBusers'
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -48,4 +49,4 @@ const User = sequelize.define('User', {
   },
 });
 
-module.exports = User;
+module.exports = DBusers;
