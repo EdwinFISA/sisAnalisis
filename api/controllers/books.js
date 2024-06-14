@@ -2,16 +2,6 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
 // Determinar la ruta de la base de datos, puede ser configurada a través de una variable de entorno
-const dbPath = process.env.DB_PATH || path.resolve(__dirname, "books.db");
-
-// Conectar a la base de datos SQLite
-const db = new sqlite3.Database(dbPath, (err) => {
-  if (err) {
-    console.error(`Error al conectar a la base de datos en ${dbPath}:`, err.message);
-  } else {
-    console.log(`Conectado a la base de datos en ${dbPath}`);
-  }
-});
 
 // Create books table if not exists
 db.run(
