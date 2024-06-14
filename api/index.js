@@ -23,11 +23,11 @@ app.use(
 );
 
 // Rutas de la API
-app.get('/api/users', usersController.getAllUsers);
-app.get('/api/users/:id', usersController.getUserById);
-app.post('/api/users', usersController.createUser);
-app.put('/api/users/:id', usersController.updateUser);
-app.delete('/api/users/:id', usersController.deleteUser);
+app.get('/api/controllers/users', usersController.getAllUsers);
+app.get('/api/controllers/users/:id', usersController.getUserById);
+app.post('/api/controllers/users', usersController.createUser);
+app.put('/api/controllers/users/:id', usersController.updateUser);
+app.delete('/api/controllers/users/:id', usersController.deleteUser);
 
 // Iniciar el servidor
 app.listen(PORT, () => {

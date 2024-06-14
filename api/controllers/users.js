@@ -1,6 +1,6 @@
 // controllers/users.js
 
-const DBuser = require('../models/DBusers.js');  // Ajusta la ruta según la estructura de tu proyecto y el nombre del modelo
+const DBuser = require('api/models/DBusers.js');  // Ajusta la ruta según la estructura de tu proyecto y el nombre del modelo
 
 // Obtener todos los usuarios
 exports.getAllUsers = (req, res) => {
