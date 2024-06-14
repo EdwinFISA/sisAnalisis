@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("../controllers/users"); // Ajusta la ruta según la estructura de tu proyecto y el nombre del controlador
+const db = require("../controllers/users.js"); // Ajusta la ruta según la estructura de tu proyecto y el nombre del controlador
 
 const router = express.Router();
 
