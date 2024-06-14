@@ -11,17 +11,18 @@ const app = express();
 const port = PORT;
 
 // Configure session with SQLite store
-//app.use(
-//  session({
-//    secret: "secret",
-//    resave: true,
-//    saveUninitialized: true,
-//    store: new SQLiteStore({
-//      db: "sessions.db",
-//      concurrentDB: true,
-//    }),
-//  })
-//);
+app.use(
+session({
+secret: "secret",
+resave: true,
+saveUninitialized: true,
+store: new SQLiteStore({
+db: "sessions.db",
+concurrentDB: true,
+}),
+  })
+);
+
 app.use(
   cors({
     origin: FRONTEND_URL,
