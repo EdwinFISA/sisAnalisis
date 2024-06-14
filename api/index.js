@@ -1,39 +1,46 @@
 const express = require("express");
-const { createProxyMiddleware } = require("http-proxy-middleware");
-const path = require("path");
+const session = require("express-session");
+const SQLiteStore = require("connect-sqlite3")(session);
+const routes = require("./routes/routes");
+const {FRONTEND_URL, PORT} = require("./config.cjs");
+
+//const cors = require("express-cors");
 const cors = require("cors");
 
 const app = express();
-const port = process.env.PORT || 3000;
+//const port = PORT;
 
-// Configuración de CORS
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
-
+// Configure session with SQLite store
 app.use(
-  cors({
-    origin: FRONTEND_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+    store: new SQLiteStore({
+      db: "sessions.db",
+      concurrentDB: true,
+    }),
   })
 );
 
-// Configuración del middleware de proxy para manejar CORS
-app.use(
-  "/api",  // Ruta base de la API
-  createProxyMiddleware({
-    target: "http://localhost:4200",  // Cambia esto al URL de tu backend
-    changeOrigin: true,
-    pathRewrite: {
-      "^/api": "",  // Ruta base de tu API
-    },
-  })
-);
 
-// Rutas y middleware adicionales de tu aplicación
-// ...
+// Configurar CORS adecuadamente
+const corsOptions = {
+  origin: FRONTEND_URL,  // Usar FRONTEND_URL definido en config.cjs
+  credentials: true,     // Permitir credenciales (cookies, tokens)
+  methods: ["GET", "POST", "PUT", "DELETE"],  // Métodos permitidos
+  allowedHeaders: ["Content-Type", "Authorization"],  // Encabezados permitidos
+};
 
-// Iniciar el servidor
-app.listen(port, () => {
-  console.log(`Servidor escuchando en el puerto ${port}`);
+app.use(cors(corsOptions));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Use routes
+app.use("/", routes);
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
