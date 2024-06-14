@@ -1,9 +1,10 @@
-// models/book.js
+// models/DBusers.js
 
 const { DataTypes } = require('sequelize');
-const sequelize = require('../sequelize');  // Asegúrate de que esta ruta sea correcta
+const sequelize = require('../sequelize');  // Asegúrate de importar tu instancia de Sequelize
 
-const Book = sequelize.define('Book', {
+// Define el modelo User
+const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -45,9 +46,6 @@ const Book = sequelize.define('Book', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-}, {
-  tableName: 'books',  // Nombre de la tabla en la base de datos
-  timestamps: false,   // Si no necesitas los timestamps created_at y updated_at
 });
 
-module.exports = Book;
+module.exports = User;

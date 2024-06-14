@@ -1,72 +1,90 @@
-// controllers/bookController.js
+// controllers/users.js
 
-const Book = require('../models/book');
+const User = require('../models/DBusers');  // Ajusta la ruta según la estructura de tu proyecto y el nombre del modelo
 
-// Crear un libro
-exports.createBook = async (req, res) => {
+// Obtener todos los usuarios
+exports.getAllUsers = (req, res) => {
+  User.findAll()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => {
+      console.error('Error al obtener usuarios:', err);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    });
+};
+
+// Crear un nuevo usuario
+exports.createUser = (req, res) => {
   const { nom, ape, nits, tel, dire, user, pass, role, state } = req.body;
-  try {
-    const book = await Book.create({ nom, ape, nits, tel, dire, user, pass, role, state });
-    res.json(book);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+
+  User.create({ nom, ape, nits, tel, dire, user, pass, role, state })
+    .then(newUser => {
+      res.status(201).json(newUser);
+    })
+    .catch(err => {
+      console.error('Error al crear usuario:', err);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    });
 };
 
-// Obtener todos los libros
-exports.getAllBooks = async (req, res) => {
-  try {
-    const books = await Book.findAll();
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+// Obtener un usuario por su ID
+exports.getUserById = (req, res) => {
+  const userId = req.params.id;
+
+  User.findByPk(userId)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ error: 'Usuario no encontrado' });
+      } else {
+        res.json(user);
+      }
+    })
+    .catch(err => {
+      console.error('Error al obtener usuario por ID:', err);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    });
 };
 
-// Obtener un libro por ID
-exports.getBookById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const book = await Book.findByPk(id);
-    if (!book) {
-      res.status(404).json({ error: 'Libro no encontrado' });
-      return;
-    }
-    res.json(book);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// Actualizar un libro
-exports.updateBook = async (req, res) => {
-  const { id } = req.params;
+// Actualizar un usuario por su ID
+exports.updateUser = (req, res) => {
+  const userId = req.params.id;
   const { nom, ape, nits, tel, dire, user, pass, role, state } = req.body;
-  try {
-    const book = await Book.findByPk(id);
-    if (!book) {
-      res.status(404).json({ error: 'Libro no encontrado' });
-      return;
-    }
-    await book.update({ nom, ape, nits, tel, dire, user, pass, role, state });
-    res.json(book);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+
+  User.findByPk(userId)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ error: 'Usuario no encontrado' });
+      } else {
+        return user.update({ nom, ape, nits, tel, dire, user, pass, role, state })
+          .then(updatedUser => {
+            res.json(updatedUser);
+          });
+      }
+    })
+    .catch(err => {
+      console.error('Error al actualizar usuario:', err);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    });
 };
 
-// Eliminar un libro
-exports.deleteBook = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const book = await Book.findByPk(id);
-    if (!book) {
-      res.status(404).json({ error: 'Libro no encontrado' });
-      return;
-    }
-    await book.destroy();
-    res.json({ message: 'Libro eliminado correctamente' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+// Eliminar un usuario por su ID
+exports.deleteUser = (req, res) => {
+  const userId = req.params.id;
+
+  User.findByPk(userId)
+    .then(user => {
+      if (!user) {
+        res.status(404).json({ error: 'Usuario no encontrado' });
+      } else {
+        return user.destroy()
+          .then(() => {
+            res.status(204).end();
+          });
+      }
+    })
+    .catch(err => {
+      console.error('Error al eliminar usuario:', err);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    });
 };
