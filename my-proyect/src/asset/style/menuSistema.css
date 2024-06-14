@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.nav {
+    width: 160px;
+     position: fixed;
+     height: 100vh;
+    background-color: #3677be;
+ }
+ .nav i {
+     color: #fff;
+     font-size: 20px;
+ }
+ .btn-superior {
+     padding-top: 0.01px;
+ }
+ .btn-superior i {
+     display: block;
+ }
+ .btn-superior label {
+     display: block;
+     color: #fff;
+     font-size: 14px;
+ }
+ /*.menuContainerInferior label {
+     color: #fff;
+     font-size: 14px;
+ }*/
+ .logoMenu {
+     display: block;
+     margin: 0 auto;
+     text-align: center;
+     width: 100px;
+     padding-top: 15px;
+     padding-bottom: 15px;
+ }
+ /*.main-content {
+     margin-left: 150px; /* Same width as the fixed nav 
+ }*/
+ .menuContainerSuperior button, .menuContainerInferior button {
+     background-color: transparent;
+     border: none;
+     display: block;
+     margin: 0 auto;
+     text-align: center;
+ }
+ .subMenu a {
+     font-size: 12px;
+     text-decoration: none;
+     color: #fff;
+ }
+ .accordion-item {
+     background-color: #3677be;
+ }
+ .accordion-item a {
+     text-decoration: none;
+     font-size: 13px;
+ }
+ .accordion-body {
+     background-color: #f9f9f9; 
+ }
+ .accordion-body a {
+     color: #000000; 
+ }
+ .accordion-body a:hover {
+     color: #23527c; 
+ }
+ .accordion-button:active, .accordion-button:focus {
+     background-color: #fff; 
+     color: #000; 
+ }
+ .accordion-button:active i, .accordion-button:focus i {
+     color: #000; 
+ }
+ .accordion-button:active label, .accordion-button:focus label {
+     color: #000; 
+ }
+ .accordion-button {
+     border: none;
+ }
+ .accordion-item {
+     border: none;
+ }

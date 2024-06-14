@@ -1,0 +1,38 @@
+html,
+body,
+#container {
+width: 100%;
+height: 100%;
+margin: 0;
+padding: 0;
+}
+#container2 {
+width: 100%;
+height: 100%;
+margin: 0;
+padding: 0;
+}
+
+    .contenedorGraficasPrincipal{
+    display: grid;
+    grid-template-columns: 50% 50%; 
+    }
+    .container_btnReporte{
+        display: grid;
+        grid-template-columns: 33.33% 33.33% 33.33%; 
+        padding: 12px;
+        justify-content: center;
+    }
+    .btnReporte{
+        padding: 30px;
+       margin-right: 12px;
+       background-color: #3677be;
+       border: none;
+       }
+  
+    .btnReporte i, .btnReporte label{
+           color: #fff;
+       }
+    .btnReporte i{
+         font-size: 35px;
+       }

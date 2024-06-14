@@ -1,0 +1,17 @@
+  .principal{
+            background-color: aqua;
+            display: grid;
+            grid-template-columns: 10% 90%;  /*cambiar por px DESPUES*/
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .menuLateral_pricipal {
+       /* background-color: brown;*/
+        }
+        .contenido_principal{ 
+            width: 800%; /*cambiar por px DESPUES*/
+            margin: 40px auto; 
+            padding: 40px; 
+          background-color: #b83636;
+        }
