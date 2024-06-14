@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "anychart": "^8.12.1"
+    "anychart": "^8.12.1",
+    "http-proxy-middleware": "^3.0.0"
   }
 }

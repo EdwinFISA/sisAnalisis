@@ -1,26 +1,14 @@
 const express = require("express");
-const session = require("express-session");
-const SQLiteStore = require("connect-sqlite3")(session);
-const routes = require("./routes/routes");
-const { FRONTEND_URL, PORT } = require("./config.cjs");
+const { createProxyMiddleware } = require("http-proxy-middleware");
+const path = require("path");
 const cors = require("cors");
 
 const app = express();
+const port = process.env.PORT || 3000;
 
-// Configurar sesión con SQLite store
-app.use(
-  session({
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-    store: new SQLiteStore({
-      db: "sessions.db",
-      concurrentDB: true,
-    }),
-  })
-);
+// Configuración de CORS
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
 
-// Configurar CORS
 app.use(
   cors({
     origin: FRONTEND_URL,
@@ -30,13 +18,22 @@ app.use(
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Configuración del middleware de proxy para manejar CORS
+app.use(
+  "/api",  // Ruta base de la API
+  createProxyMiddleware({
+    target: "http://localhost:4200",  // Cambia esto al URL de tu backend
+    changeOrigin: true,
+    pathRewrite: {
+      "^/api": "",  // Ruta base de tu API
+    },
+  })
+);
 
-// Usar las rutas
-app.use("/", routes);
+// Rutas y middleware adicionales de tu aplicación
+// ...
 
 // Iniciar el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+app.listen(port, () => {
+  console.log(`Servidor escuchando en el puerto ${port}`);
 });
