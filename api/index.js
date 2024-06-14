@@ -24,14 +24,15 @@ app.use(
 );
 
 
-app.use(
-  cors({
-    origin: FRONTEND_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],  // Métodos permitidos
-    allowedHeaders: ["Content-Type", "Authorization"],  // Encabezados permitidos
-  })
-);
+// Configurar CORS adecuadamente
+const corsOptions = {
+  origin: FRONTEND_URL,  // Usar FRONTEND_URL definido en config.cjs
+  credentials: true,     // Permitir credenciales (cookies, tokens)
+  methods: ["GET", "POST", "PUT", "DELETE"],  // Métodos permitidos
+  allowedHeaders: ["Content-Type", "Authorization"],  // Encabezados permitidos
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
