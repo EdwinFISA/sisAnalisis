@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { FRONTEND_URL, PORT } = require('./config.cjs');
 const sequelize = require('./sequelize');  // Importa la instancia de Sequelize
-const bookController = require('./controllers/bookController');
+const bookController = require('./controllers/bookController');  // Ajusta la ruta según la estructura de tu proyecto
 
 const app = express();
 
