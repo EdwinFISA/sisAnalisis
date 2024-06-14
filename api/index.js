@@ -8,7 +8,7 @@ const {FRONTEND_URL, PORT} = require("./config.cjs");
 const cors = require("cors");
 
 const app = express();
-const port = PORT;
+//const port = PORT;
 
 // Configure session with SQLite store
 app.use(
